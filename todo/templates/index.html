@@ -4,7 +4,25 @@
 
 {% block content %}
 <div>
-    <h2>Home Page</h2>
-    <p>{{ text }}</p>
+    <h2 class="text-center">{{ user.first_name+"'s Todo" }}</h2>
+    <form method="POST">
+        <div class="mb-3 d-flex">
+            <input type="text" name="todo" class="form-control me-2" id="todo" placeholder="Add New.." required>
+            <button type="submit" class="btn btn-outline-info">ADD</button>
+        </div>
+    </form>
+
+    <ul class="list-group">
+        {% for todo in user.todos %}
+            <li class="list-group-item d-flex justify-content-between align-items-start list-group-item-info mb-1">
+                <div class="ms-2 me-auto">
+                <div class="">{{ todo.text }}</div>
+                </div>
+                <span class="badge bg-info rounded-pill me-2">{{ todo.date }}</span>
+                <button type="button" class="btn-close" onclick="removeTodo({{ todo.id }})">
+                </button>
+            </li>
+        {% endfor %}
+    </ul>
 </div>
 {% endblock %}
